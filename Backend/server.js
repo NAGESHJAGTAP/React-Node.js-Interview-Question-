@@ -44,20 +44,69 @@
 
 
 
-const express= require('express');
+// const express= require('express');
+// const app=express();
+// const port=3000;
+
+// const users=[
+//     {id: 1 , name:"nagesh jagtap" , age:20 , course: "full stack web developer"}, 
+//     {id:2, name:"shubham jagtap" , age:20 , course: "full stack web developer"}, 
+//     {id:3, name:"om mule" , age:20 , course: "full stack web developer"}
+// ];
+
+// app.get('/users', (req , res)=>{
+//     res.send(users);
+// });
+
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// }); 
+
+
+
+
+
+
+
+
+
+
+// POST New User
+// Task:
+// Create a POST /users route to add a user to an in-memory array.
+
+// Concepts Tested:
+
+// POST method
+// req.body parsing
+// Middleware usage (e.g., express.json())
+
+
+
+const express =require('express');
 const app=express();
 const port=3000;
 
-const users=[
-    {id: 1 , name:"nagesh jagtap" , age:20 , course: "full stack web developer"}, 
-    {id:2, name:"shubham jagtap" , age:20 , course: "full stack web developer"}, 
-    {id:3, name:"om mule" , age:20 , course: "full stack web developer"}
+app.use(express.json());
+
+let users =[
+    {id:1, name:"nagesh jagtap", age:20, state:"Maharashtra" }
 ];
 
 app.get('/users', (req , res)=>{
     res.send(users);
 });
 
+
+app.post('/users', (req, res) => {
+    const newUser = req.body;
+    newUser.id = users.length + 1; 
+    users.push(newUser);
+    res.status(201).json({ message: "User added", user: newUser }); 
+});
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});   
+});
