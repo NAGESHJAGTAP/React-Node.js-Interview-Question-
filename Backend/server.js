@@ -71,7 +71,7 @@
 
 
 
-// POST New User
+// 3. POST New User
 // Task:
 // Create a POST /users route to add a user to an in-memory array.
 
@@ -83,17 +83,65 @@
 
 
 
-const express =require('express');
-const app=express();
-const port=3000;
+// const express =require('express');
+// const app=express();
+// const port=3000;
+
+// app.use(express.json());
+
+// let users =[
+//     {id:1, name:"nagesh jagtap", age:20, state:"Maharashtra" }
+// ];
+
+// app.get('/users', (req , res)=>{
+//     res.send(users);
+// });
+
+
+// app.post('/users', (req, res) => {
+//     const newUser = req.body;
+//     newUser.id = users.length + 1; 
+//     users.push(newUser);
+//     res.status(201).json({ message: "User added", user: newUser }); 
+// });
+
+
+
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
+
+
+
+
+
+
+
+
+// 4. GET User by ID
+// Task:
+// Create a route /users/:id that returns a user by ID.
+
+// Concepts Tested:
+
+// req.params usage
+// Conditional logic
+
+
+
+const express = require('express');
+const app = express();
+const port = 3000;
 
 app.use(express.json());
 
-let users =[
-    {id:1, name:"nagesh jagtap", age:20, state:"Maharashtra" }
+let users = [
+    {id :1, name:"nagesh jagtap", age:20, city:"pune" },
+    {id :2, name:"shubham jagtap", age:20, city:"mumbai" },
 ];
 
-app.get('/users', (req , res)=>{
+
+app.get('/users', (req, res) => {   
     res.send(users);
 });
 
@@ -103,10 +151,20 @@ app.post('/users', (req, res) => {
     newUser.id = users.length + 1; 
     users.push(newUser);
     res.status(201).json({ message: "User added", user: newUser }); 
-});
+}   );                  
+
+app.get('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id, 10); 
+    const user = users.find(u => u.id === userId); 
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user); 
+}   );
 
 
-
-app.listen(port, () => {
+app.listen(port, () => {        
     console.log(`Server is running on http://localhost:${port}`);
-});
+}   );                                                                                                                                                            
