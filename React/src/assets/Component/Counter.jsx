@@ -34,37 +34,57 @@
 
 //  2. Counter with useReducer
 
-import React, { useReducer } from 'react';
+// import React, { useReducer } from 'react';
 
-const reduser = (state, action) => {
-    switch (action.type) {
-        case 'increment':
-            return { count: state.count + 1 };
-        case 'decrement':
-            return { count: state.count - 1 };
-        case 'reset':
-            return { count: 0 };
-        default:
-            return state;
-    }
-};
+// const reduser = (state, action) => {
+//     switch (action.type) {
+//         case 'increment':
+//             return { count: state.count + 1 };
+//         case 'decrement':
+//             return { count: state.count - 1 };
+//         case 'reset':
+//             return { count: 0 };
+//         default:
+//             return state;
+//     }
+// };
 
-function Counter(){
-    const [state, dispatch] = useReducer(reduser, { count: 0 });
+// function Counter(){
+//     const [state, dispatch] = useReducer(reduser, { count: 0 });
 
-    return(
-        <div>
-            <h1> count : {state.count}</h1>
-            <button type='button' onClick={()=>dispatch({type:'increment'})}> increment </button>
-            <button type='button' onClick={()=>dispatch({type:'decrement'})}>decrement</button>
-            <button type='button' onClick={()=>dispatch({type:'reset'})}>reset</button>
-        </div>
-    )   
+//     return(
+//         <div>
+//             <h1> count : {state.count}</h1>
+//             <button type='button' onClick={()=>dispatch({type:'increment'})}> increment </button>
+//             <button type='button' onClick={()=>dispatch({type:'decrement'})}>decrement</button>
+//             <button type='button' onClick={()=>dispatch({type:'reset'})}>reset</button>
+//         </div>
+//     )   
+// }
+// export default Counter;
+
+
+
+
+
+
+
+
+// 3. Counter with Limit (Min 0, Max 10)
+
+import React, { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)} disabled={count >= 10}>Increment</button>
+      <button onClick={() => setCount(count - 1)} disabled={count <= 0}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
 }
 export default Counter;
-
-
-
 
 
 
