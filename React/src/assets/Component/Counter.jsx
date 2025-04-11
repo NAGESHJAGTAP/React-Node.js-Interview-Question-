@@ -72,19 +72,55 @@
 
 // 3. Counter with Limit (Min 0, Max 10)
 
-import React, { useState } from 'react';
-function Counter() {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count + 1)} disabled={count >= 10}>Increment</button>
-      <button onClick={() => setCount(count - 1)} disabled={count <= 0}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
-    </div>
-  );
-}
-export default Counter;
+// import React, { useState } from 'react';
+// function Counter() {
+//   const [count, setCount] = useState(0);
+//   return (
+//     <div>
+//       <h1>Count: {count}</h1>
+//       <button onClick={() => setCount(count + 1)} disabled={count >= 10}>Increment</button>
+//       <button onClick={() => setCount(count - 1)} disabled={count <= 0}>Decrement</button>
+//       <button onClick={() => setCount(0)}>Reset</button>
+//     </div>
+//   );
+// }
+// export default Counter;
+
+
+
+
+
+
+
+// Counter with Limit (Min -10, Max 10)
+// import React, { useState } from 'react';
+
+// function Counter(){
+// const [count , setCount] = useState(0);
+
+// return(
+//     <>
+//     <h1> count : {count}</h1>
+//     <button type='button' onClick={()=>setCount(count+1)} disabled={count>=10}>Increment</button>
+//     <button type='button' onClick={()=>setCount(count-1)} disabled={count<= -10}>Decrement</button>
+//     <button type='button' onClick={()=>setCount(0)}>reset</button>
+//     </>
+// )
+// }
+
+// export default Counter;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
