@@ -116,33 +116,66 @@
 
 
 
-// 4. Counter with useEffect
-import React, { useState, useEffect } from 'react';
+// Counter with useEffect
+// import React, { useState, useEffect } from 'react';
 
-function Counter() {
-  const [count, setCount] = useState(0);
+// function Counter() {
+//   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    console.log("Count updated:", count);
-  }, [count]);
+//   useEffect(() => {
+//     console.log("Count updated:", count);
+//   }, [count]);
+
+//   return (
+//     <div>
+//       <h1>Count: {count}</h1>
+//       <button onClick={() => setCount(count + 1)}>Increment</button>
+//       <button onClick={() => setCount(count - 1)}>Decrement</button>
+//       <button onClick={() => setCount(0)}>Reset</button>
+//     </div>
+//   );
+// }
+// export default Counter;
+
+
+
+
+
+
+
+
+
+
+
+//  Reusable Counter Component (with props)
+
+
+import React, { useState } from 'react';
+
+function Counter({ min = 0, max = 10 }) {
+  const [count, setCount] = useState(min);
+
+  const handleIncrement = () => {
+    if (count < max) setCount(count + 1);
+  };
+
+  const handleDecrement = () => {
+    if (count > min) setCount(count - 1);
+  };
+
+  const handleReset = () => setCount(min);
 
   return (
     <div>
       <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <button onClick={handleIncrement} disabled={count >= max}>increment</button>
+      <button onClick={handleDecrement} disabled={count <= min}>decrement</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 }
 
 export default Counter;
-
-
-
-
-
-
 
 
 
