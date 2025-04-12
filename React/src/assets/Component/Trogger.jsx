@@ -32,20 +32,77 @@
 
 // 2: Toggle with Separate Show and Hide Buttons
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+
+// function ToggleText() {
+//   const [show, setShow] = useState(false);
+
+//   return (
+//     <div>
+//       {!show && <button onClick={() => setShow(true)}>Show</button>}
+//       {show && (
+//         <>
+//           <p>Hello World</p>
+//           <button onClick={() => setShow(false)}>Hide</button>
+//         </>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default ToggleText;
+
+
+
+
+
+// 3: Toggle with Custom Text Component
+
+// import React, { useState } from 'react';
+
+// function Message() {
+//   return <p>Hello World</p>;
+// }
+
+// function ToggleText() {
+//   const [show, setShow] = useState(false);
+
+//   return (
+//     <div>
+//       <button onClick={() => setShow(!show)}>
+//         {show ? 'Hide Message' : 'Show Message'}
+//       </button>
+//       {show && <Message />}
+//     </div>
+//   );
+// }
+
+// export default ToggleText;
+
+
+
+
+
+
+
+
+
+
+// 4: Toggle using useReducer (Advanced/Interview)
+
+import React, { useReducer } from 'react';
+
+const toggleReducer = (state) => !state;
 
 function ToggleText() {
-  const [show, setShow] = useState(false);
+  const [show, toggle] = useReducer(toggleReducer, false);
 
   return (
     <div>
-      {!show && <button onClick={() => setShow(true)}>Show</button>}
-      {show && (
-        <>
-          <p>Hello World</p>
-          <button onClick={() => setShow(false)}>Hide</button>
-        </>
-      )}
+      <button onClick={toggle}>
+        {show ? 'Hide' : 'Show'}
+      </button>
+      {show && <p>Hello World</p>}
     </div>
   );
 }
