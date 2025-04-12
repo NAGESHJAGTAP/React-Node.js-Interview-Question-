@@ -133,42 +133,100 @@
 
 
 
-// 3: Todo with useReducer
+// // 3: Todo with useReducer
 
 
-import React, { useReducer, useState } from 'react';
+// import React, { useReducer, useState } from 'react';
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      return [...state, { text: action.payload, done: false }];
-    case 'TOGGLE':
-      return state.map((todo, i) =>
-        i === action.index ? { ...todo, done: !todo.done } : todo
-      );
-    case 'DELETE':
-      return state.filter((_, i) => i !== action.index);
-    default:
-      return state;
-  }
-};
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case 'ADD':
+//       return [...state, { text: action.payload, done: false }];
+//     case 'TOGGLE':
+//       return state.map((todo, i) =>
+//         i === action.index ? { ...todo, done: !todo.done } : todo
+//       );
+//     case 'DELETE':
+//       return state.filter((_, i) => i !== action.index);
+//     default:
+//       return state;
+//   }
+// };
 
-function TodoReducer() {
-  const [state, dispatch] = useReducer(reducer, []);
+// function TodoReducer() {
+//   const [state, dispatch] = useReducer(reducer, []);
+//   const [input, setInput] = useState('');
+
+//   return (
+//     <div>
+//       <h2>Todo with useReducer</h2>
+//       <input value={input} onChange={(e) => setInput(e.target.value)} />
+//       <button onClick={() => { if (input) { dispatch({ type: 'ADD', payload: input }); setInput(''); }}}>Add</button>
+
+//       <ul>
+//         {state.map((todo, index) => (
+//           <li key={index} style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+//             <input type="checkbox" checked={todo.done} onChange={() => dispatch({ type: 'TOGGLE', index })} />
+//             {todo.text}
+//             <button onClick={() => dispatch({ type: 'DELETE', index })}>❌</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default TodoReducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 4: Todo with LocalStorage 
+
+
+import React, { useState, useEffect } from 'react';
+
+function TodoWithStorage() {
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem('myTodos');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('myTodos', JSON.stringify(todos));
+  }, [todos]);
+
+  const handleAdd = () => {
+    if (input.trim() === '') return;
+    setTodos([...todos, input]);
+    setInput('');
+  };
+
+  const handleDelete = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
 
   return (
     <div>
-      <h2>Todo with useReducer</h2>
+      <h2>Todo with LocalStorage</h2>
       <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button onClick={() => { if (input) { dispatch({ type: 'ADD', payload: input }); setInput(''); }}}>Add</button>
+      <button onClick={handleAdd}>Add</button>
 
       <ul>
-        {state.map((todo, index) => (
-          <li key={index} style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
-            <input type="checkbox" checked={todo.done} onChange={() => dispatch({ type: 'TOGGLE', index })} />
-            {todo.text}
-            <button onClick={() => dispatch({ type: 'DELETE', index })}>❌</button>
+        {todos.map((todo, i) => (
+          <li key={i}>
+            {todo}
+            <button onClick={() => handleDelete(i)}>❌</button>
           </li>
         ))}
       </ul>
@@ -176,4 +234,4 @@ function TodoReducer() {
   );
 }
 
-export default TodoReducer;
+export default TodoWithStorage;
