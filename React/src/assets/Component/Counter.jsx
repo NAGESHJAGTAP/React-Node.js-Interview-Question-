@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 // 1. Counter Component
 // Problem: Create a counter component with increment, decrement, and reset buttons.
 
@@ -116,7 +118,7 @@
 
 
 
-// Counter with useEffect
+//4.  Counter with useEffect
 // import React, { useState, useEffect } from 'react';
 
 // function Counter() {
@@ -147,94 +149,32 @@
 
 
 
-//  Reusable Counter Component (with props)
-
-
-import React, { useState } from 'react';
-
-function Counter({ min = 0, max = 10 }) {
-  const [count, setCount] = useState(min);
-
-  const handleIncrement = () => {
-    if (count < max) setCount(count + 1);
-  };
-
-  const handleDecrement = () => {
-    if (count > min) setCount(count - 1);
-  };
-
-  const handleReset = () => setCount(min);
-
-  return (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={handleIncrement} disabled={count >= max}>increment</button>
-      <button onClick={handleDecrement} disabled={count <= min}>decrement</button>
-      <button onClick={handleReset}>Reset</button>
-    </div>
-  );
-}
-
-export default Counter;
-
-
-
-
-
-
-
-
-
-// 2. Todo List
-// Problem: Build a simple todo list with the ability to add and delete items.
-
-// Concepts Tested:
-
-// List rendering (.map)
-// useState
-// Event handling
-
-
+// 5. Reusable Counter Component (with props)
 
 
 // import React, { useState } from 'react';
 
-// function TodoList() {
-//   const [todos, setTodos] = useState([]);
-//   const [inputValue, setInputValue] = useState('');
+// function Counter({ min = 0, max = 10 }) {
+//   const [count, setCount] = useState(min);
 
-//   const handleAddTodo = () => {
-//     if (inputValue.trim() !== '') {
-//       setTodos([...todos, inputValue]);
-//       setInputValue('');
-//     }
+//   const handleIncrement = () => {
+//     if (count < max) setCount(count + 1);
 //   };
 
-//   const handleDelete = (index) => {
-//     const newTodos = [...todos];
-//     newTodos.splice(index, 1);
-//     setTodos(newTodos);
+//   const handleDecrement = () => {
+//     if (count > min) setCount(count - 1);
 //   };
+
+//   const handleReset = () => setCount(min);
 
 //   return (
 //     <div>
-//       <h1>Todo List</h1>
-//       <input
-//         type='text'
-//         value={inputValue}
-//         onChange={(e) => setInputValue(e.target.value)}
-//       />
-//       <button type='button' onClick={handleAddTodo}>Add Todo</button>
-//       <ul>
-//         {todos.map((todo, index) => (
-//           <li key={index}>
-//             {todo}
-//             <button type='button' onClick={() => handleDelete(index)}>Delete</button>
-//           </li>
-//         ))}
-//       </ul>
+//       <h1>Count: {count}</h1>
+//       <button onClick={handleIncrement} disabled={count >= max}>increment</button>
+//       <button onClick={handleDecrement} disabled={count <= min}>decrement</button>
+//       <button onClick={handleReset}>Reset</button>
 //     </div>
 //   );
 // }
 
-// export default TodoList;
+// export default Counter;
