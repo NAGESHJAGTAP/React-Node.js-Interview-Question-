@@ -90,21 +90,21 @@
 
 // 4: Toggle using useReducer (Advanced/Interview)
 
-import React, { useReducer } from 'react';
+// import React, { useReducer } from 'react';
 
-const toggleReducer = (state) => !state;
+// const toggleReducer = (state) => !state;
 
-function ToggleText() {
-  const [show, toggle] = useReducer(toggleReducer, false);
+// function ToggleText() {
+//   const [show, toggle] = useReducer(toggleReducer, false);
 
-  return (
-    <div>
-      <button onClick={toggle}>
-        {show ? 'Hide' : 'Show'}
-      </button>
-      {show && <p>Hello World</p>}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <button onClick={toggle}>
+//         {show ? 'Hide' : 'Show'}
+//       </button>
+//       {show && <p>Hello World</p>}
+//     </div>
+//   );
+// }
 
-export default ToggleText;
+// export default ToggleText;
