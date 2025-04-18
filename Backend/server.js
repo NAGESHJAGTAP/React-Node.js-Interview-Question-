@@ -236,23 +236,73 @@
 
 
 
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const app = express();
+// app.use(express.json());
+
+// // User Schema
+// const User = mongoose.model('User', new mongoose.Schema({
+//   name: String, email: String, age: Number
+// }));
+
+// // PATCH route to update specific fields
+// app.patch('/users/:id', async (req, res) => {
+//   const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+//   if (!user) return res.status(404).send('User not found');
+//   res.send(user);
+// });
+
+// // Start server
+// mongoose.connect('mongodb://localhost/testdb')
+//   .then(() => app.listen(3000, () => console.log('Server running')));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// DELETE a User
+// Task:
+// Create a DELETE /users/:id route to remove a user from the list.
+
+// Concepts Tested:
+
+// Array filtering
+// Status codes (204 No Content, 404 Not Found)
+
+
+
+
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
-app.use(express.json());
 
-// User Schema
-const User = mongoose.model('User', new mongoose.Schema({
-  name: String, email: String, age: Number
-}));
+let users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' }
+];
 
-// PATCH route to update specific fields
-app.patch('/users/:id', async (req, res) => {
-  const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  if (!user) return res.status(404).send('User not found');
-  res.send(user);
+app.delete('/users/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const user = users.find(u => u.id === id);
+
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  users = users.filter(u => u.id !== id);
+  res.status(204).send(); // No Content
 });
 
-// Start server
-mongoose.connect('mongodb://localhost/testdb')
-  .then(() => app.listen(3000, () => console.log('Server running')));
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
