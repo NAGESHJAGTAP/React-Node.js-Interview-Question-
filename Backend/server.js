@@ -286,9 +286,9 @@ const express = require('express');
 const app = express();
 
 let users = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, name: 'Charlie' }
+  { id: 1, name: 'Nagesh' },
+  { id: 2, name: 'shubham' },
+  { id: 3, name: 'om' }
 ];
 
 app.delete('/users/:id', (req, res) => {
