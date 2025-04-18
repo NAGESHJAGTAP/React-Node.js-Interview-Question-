@@ -129,42 +129,90 @@
 
 
 
-const express = require('express');
-const app = express();
-const port = 3000;
+// const express = require('express');
+// const app = express();
+// const port = 3000;
 
+// app.use(express.json());
+
+// let users = [
+//     {id :1, name:"nagesh jagtap", age:20, city:"pune" },
+//     {id :2, name:"shubham jagtap", age:20, city:"mumbai" },
+// ];
+
+
+// app.get('/users', (req, res) => {   
+//     res.send(users);
+// });
+
+
+// app.post('/users', (req, res) => {
+//     const newUser = req.body;
+//     newUser.id = users.length + 1; 
+//     users.push(newUser);
+//     res.status(201).json({ message: "User added", user: newUser }); 
+// }   );                  
+
+// app.get('/users/:id', (req, res) => {
+//     const userId = parseInt(req.params.id, 10); 
+//     const user = users.find(u => u.id === userId); 
+
+//     if (!user) {
+//         return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.json(user); 
+// }   );
+
+
+// app.listen(port, () => {        
+//     console.log(`Server is running on http://localhost:${port}`);
+// }   );        
+
+
+
+
+
+
+
+
+
+
+
+// 5.PUT to Update Entire User
+// Task:
+// Use a PUT /users/:id route to fully update a user object.
+
+// Concepts Tested:
+
+// Full object replacement
+// Status codes (e.g., 404, 200)
+
+
+
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
 app.use(express.json());
 
-let users = [
-    {id :1, name:"nagesh jagtap", age:20, city:"pune" },
-    {id :2, name:"shubham jagtap", age:20, city:"mumbai" },
-];
 
+const User = mongoose.model('User', new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number
+}));
 
-app.get('/users', (req, res) => {   
-    res.send(users);
+// PUT to update full user
+app.put('/users/:id', async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true, overwrite: true }
+  );
+  if (!user) return res.status(404).send('User not found');
+  res.send(user);
 });
 
-
-app.post('/users', (req, res) => {
-    const newUser = req.body;
-    newUser.id = users.length + 1; 
-    users.push(newUser);
-    res.status(201).json({ message: "User added", user: newUser }); 
-}   );                  
-
-app.get('/users/:id', (req, res) => {
-    const userId = parseInt(req.params.id, 10); 
-    const user = users.find(u => u.id === userId); 
-
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(user); 
-}   );
-
-
-app.listen(port, () => {        
-    console.log(`Server is running on http://localhost:${port}`);
-}   );                                                                                                                                                            
+// Connect and start
+mongoose.connect('mongodb://localhost:27017/testdb')
+  .then(() => app.listen(3000, () => console.log('Running')))
