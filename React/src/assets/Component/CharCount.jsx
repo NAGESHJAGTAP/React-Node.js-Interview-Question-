@@ -49,19 +49,45 @@
 
 // 3. Line Count Code
 
+// import React, { useState } from 'react';
+// function LineCount() {
+//   const [text, setText] = useState('');
+//   const count = text ? text.split('\n').length : 0;
+//   return (
+//     <div>
+//       <h3>Line Count</h3>
+//       <textarea
+//         value={text}
+//         onChange={(e) => setText(e.target.value)}
+//       />
+//       <p>Lines: {count}</p>
+//     </div>
+//   );
+// }
+// export default LineCount;
+
+
+
+
+
+
+
+// 4 Live Preview Code
+
 import React, { useState } from 'react';
-function LineCount() {
+function LivePreview() {
   const [text, setText] = useState('');
-  const count = text ? text.split('\n').length : 0;
   return (
     <div>
-      <h3>Line Count</h3>
+      <h3>Live Preview</h3>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <p>Lines: {count}</p>
+      <div style={{ marginTop: '10px', whiteSpace: 'pre-wrap' }}>
+        {text || 'Preview will appear here...'}
+      </div>
     </div>
   );
 }
-export default LineCount;
+export default LivePreview;
