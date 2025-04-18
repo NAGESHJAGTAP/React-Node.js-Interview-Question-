@@ -56,35 +56,74 @@
 
 // 2. Async/Await Inside useEffect
 
-import React, { useEffect, useState } from 'react';
-const UserList = () => {
+// import React, { useEffect, useState } from 'react';
+// const UserList = () => {
+//   const [users, setUsers] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const res = await fetch("https://jsonplaceholder.typicode.com/users");
+//         const data = await res.json();
+//         setUsers(data);
+//       } catch (err) {
+//         console.error("Failed to fetch users", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchUsers();
+//   }, []);
+//   return (
+//     <div>
+//       <h2>Users</h2>
+//       {loading ? <p>Loading...</p> : (
+//         <ul>
+//           {users.map(user => <li key={user.id}>{user.name}</li>)}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default UserList;
+
+
+
+
+
+// 3. Separate Component for User
+
+function User({ user }) {
+  return (
+    <li>
+      <strong>{user.name}</strong> - {user.email}
+    </li>
+  );
+}
+
+function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/users");
-        const data = await res.json();
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res => res.json())
+      .then(data => {
         setUsers(data);
-      } catch (err) {
-        console.error("Failed to fetch users", err);
-      } finally {
         setLoading(false);
-      }
-    };
-    fetchUsers();
+      });
   }, []);
+
   return (
     <div>
       <h2>Users</h2>
       {loading ? <p>Loading...</p> : (
         <ul>
-          {users.map(user => <li key={user.id}>{user.name}</li>)}
+          {users.map(user => <User key={user.id} user={user} />)}
         </ul>
       )}
     </div>
   );
-};
-
-export default UserList;
+}
 
