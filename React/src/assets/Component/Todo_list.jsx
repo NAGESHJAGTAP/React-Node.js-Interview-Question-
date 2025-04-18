@@ -193,45 +193,45 @@
 // 4: Todo with LocalStorage 
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
-function TodoWithStorage() {
-  const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem('myTodos');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [input, setInput] = useState('');
+// function TodoWithStorage() {
+//   const [todos, setTodos] = useState(() => {
+//     const saved = localStorage.getItem('myTodos');
+//     return saved ? JSON.parse(saved) : [];
+//   });
+//   const [input, setInput] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem('myTodos', JSON.stringify(todos));
-  }, [todos]);
+//   useEffect(() => {
+//     localStorage.setItem('myTodos', JSON.stringify(todos));
+//   }, [todos]);
 
-  const handleAdd = () => {
-    if (input.trim() === '') return;
-    setTodos([...todos, input]);
-    setInput('');
-  };
+//   const handleAdd = () => {
+//     if (input.trim() === '') return;
+//     setTodos([...todos, input]);
+//     setInput('');
+//   };
 
-  const handleDelete = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
-  };
+//   const handleDelete = (index) => {
+//     setTodos(todos.filter((_, i) => i !== index));
+//   };
 
-  return (
-    <div>
-      <h2>Todo with LocalStorage</h2>
-      <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button onClick={handleAdd}>Add</button>
+//   return (
+//     <div>
+//       <h2>Todo with LocalStorage</h2>
+//       <input value={input} onChange={(e) => setInput(e.target.value)} />
+//       <button onClick={handleAdd}>Add</button>
 
-      <ul>
-        {todos.map((todo, i) => (
-          <li key={i}>
-            {todo}
-            <button onClick={() => handleDelete(i)}>❌</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+//       <ul>
+//         {todos.map((todo, i) => (
+//           <li key={i}>
+//             {todo}
+//             <button onClick={() => handleDelete(i)}>❌</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
 
-export default TodoWithStorage;
+// export default TodoWithStorage;
