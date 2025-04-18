@@ -190,29 +190,69 @@
 
 
 
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const app = express();
+// app.use(express.json());
+
+
+// const User = mongoose.model('User', new mongoose.Schema({
+//   name: String,
+//   email: String,
+//   age: Number
+// }));
+
+// // PUT to update full user
+// app.put('/users/:id', async (req, res) => {
+//   const user = await User.findByIdAndUpdate(
+//     req.params.id,
+//     req.body,
+//     { new: true, overwrite: true }
+//   );
+//   if (!user) return res.status(404).send('User not found');
+//   res.send(user);
+// });
+
+// // Connect and start
+// mongoose.connect('mongodb://localhost:27017/testdb')
+//   .then(() => app.listen(3000, () => console.log('Running')))
+
+
+
+
+
+
+
+
+
+// 6. PATCH to Partially Update a User
+// Task:
+// Create a PATCH /users/:id endpoint to update only selected fields.
+
+// Concepts Tested:
+
+// Partial update logic
+// Merging existing data
+
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 
-
+// User Schema
 const User = mongoose.model('User', new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number
+  name: String, email: String, age: Number
 }));
 
-// PUT to update full user
-app.put('/users/:id', async (req, res) => {
-  const user = await User.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true, overwrite: true }
-  );
+// PATCH route to update specific fields
+app.patch('/users/:id', async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
   if (!user) return res.status(404).send('User not found');
   res.send(user);
 });
 
-// Connect and start
-mongoose.connect('mongodb://localhost:27017/testdb')
-  .then(() => app.listen(3000, () => console.log('Running')))
+// Start server
+mongoose.connect('mongodb://localhost/testdb')
+  .then(() => app.listen(3000, () => console.log('Server running')));
